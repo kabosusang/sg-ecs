@@ -1,13 +1,23 @@
 #+TITLE: sg-ecs
 #+AUTHOR: Kabosu
-#+DATE: 2026-06-16
+#+DATE: 2026-06-17
+
 ** 项目简介
-参考 bevy-ecs 实现的简单ecs框架
-- https://github.com/bevyengine/bevy - bevy
+参考 bevy-ecs 和 entt 实现的简单 ECS 框架
 
-文章链接:
+- <https://github.com/bevyengine/bevy> - bevy
+- <https://github.com/skypjack/entt> - entt
 
+包含:
+- [x] sparse + archetype 混合存储
+- [x] schedule 调度器
+- [x] resource
+- [x] plugin (default - window plugin)
+- [x] event
+- [x] system_set
+- [ ] renderworld
+
+** 文章链接
 
 ** 使用示例
-
 
