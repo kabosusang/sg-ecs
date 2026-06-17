@@ -1,1 +1,13 @@
+#+TITLE: sg-ecs
+#+AUTHOR: Kabosu
+#+DATE: 2026-06-16
+** 项目简介
+参考 bevy-ecs 实现的简单ecs框架
+- https://github.com/bevyengine/bevy - bevy
+
+文章链接:
+
+
+** 使用示例
+
 
