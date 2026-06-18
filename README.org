@@ -9,13 +9,13 @@
 - <https://github.com/skypjack/entt> - entt
 
 包含:
-- [x] sparse + archetype 混合存储
-- [x] schedule 调度器
-- [x] resource
-- [x] plugin (default - window plugin)
-- [x] event
-- [x] system_set
-- [ ] renderworld
+- [√] sparse + archetype 混合存储
+- [√] schedule 调度器
+- [√] resource
+- [√] plugin (default - window plugin)
+- [√] event
+- [√] system_set
+- [?] renderworld
 
 ** 文章链接
 
