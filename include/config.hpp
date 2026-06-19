@@ -11,3 +11,12 @@
 #define ENTITY_INDEX_BITS 48
 #endif
 
+//component id
+#ifndef COMPONENT_ID_TYPE
+  #include <cstdint>
+  #define COMPONENT_ID_TYPE std::uint32_t
+#else
+#endif
+
+
+
