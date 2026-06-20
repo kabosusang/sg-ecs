@@ -2,7 +2,8 @@
 #include <print>
 #include <vector>
 
-#include "core/component_mask.hpp"
+#include <storage/sparse_set.hpp>
+
 
 struct Position {
 	float x = 0, y = 0;
@@ -16,13 +17,10 @@ struct Health {
 
 int main() {
 	using namespace ecs;
-	std::println("Position hash: {}", type_hash<Position>());
 
-	std::println("Position hash: {}", type_hash<Position>());
+    
 
-	std::println("Position hash: {}", type_hash("Position"));
-
-
+    return 0;
 
 
 

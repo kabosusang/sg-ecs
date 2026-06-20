@@ -1,5 +1,5 @@
-#pragma once
 #include <cstddef>
+#pragma once
 #include <cstdint>
 #include <vector>
 
@@ -21,7 +21,6 @@ struct entity_index {
 		return entity(idx, versions_[idx]);
 	}
 
-	// 销毁: bump version 让旧引用失效, index 回 freelist
 	void despawn(entity e) noexcept {
 		uint64_t idx = e.index();
 		if (idx >= locations_.size()) {
