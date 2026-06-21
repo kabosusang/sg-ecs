@@ -3,7 +3,7 @@
 #include <vector>
 
 #include <storage/sparse_set.hpp>
-
+#include <storage/table.hpp>
 
 struct Position {
 	float x = 0, y = 0;

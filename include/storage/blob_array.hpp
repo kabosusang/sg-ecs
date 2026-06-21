@@ -125,6 +125,22 @@ public:
 		swap_remove(size_ - 1);
 	}
 
+	void resize(size_t new_size) {
+		if (new_size < size_) {
+			for (size_t i = new_size; i < size_; ++i) {
+				drop_(at(i));
+			}
+		} else if (new_size > capacity_) {
+			reserve(new_size);
+		}
+		size_ = new_size;
+	}
+
+	void copy_from(const blob_array& src, size_t src_index, size_t dst_index) {
+		drop_(at(dst_index));
+		move_(at(dst_index), const_cast<uint8_t*>(src.at(src_index)));
+	}
+
 private:
 	uint8_t* data_ = nullptr;
 	size_t size_ = 0;
