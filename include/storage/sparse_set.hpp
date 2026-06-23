@@ -82,7 +82,7 @@ public:
 };
 
 
-
+//废弃
 template <typename T>
 class sparse_set {
 	static constexpr uint32_t NONE = std::numeric_limits<uint32_t>::max();

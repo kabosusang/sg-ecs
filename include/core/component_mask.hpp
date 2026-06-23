@@ -34,6 +34,14 @@ public:
 		return mask_ == 0;
 	}
 
+	[[nodiscard]] bool operator==(const component_mask& other) const noexcept {
+		return mask_ == other.mask_;
+	}
+
+	[[nodiscard]] bool operator!=(const component_mask& other) const noexcept {
+		return mask_ != other.mask_;
+	}
+
 	//遍历
 	template <typename F>
 		requires std::invocable<F, component_id_type>

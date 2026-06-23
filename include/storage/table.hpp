@@ -64,18 +64,23 @@ public:
 
 	template <typename OnMove>
 	void swap_remove(size_t row, OnMove&& on_move) {
-		size_t last = entities_.size() - 1;
+		auto last = entities_.size() - 1;
+
 		if (row != last) {
-			entity moved = entities_[last];
+			auto moved = entities_[last]; // 最后一个实体
+            
 			for (auto& col : columns_) {
 				col.copy_from(col, last, row);
-			}
+			} // 最后一行数据复制到删除位置
+            
 			entities_[row] = moved;
 			on_move(moved, row);
 		}
 		for (auto& col : columns_) {
 			col.swap_remove(last);
-		}
+		}//删除最后一列的组件数据
+        
+        //删除最后一个实体
 		entities_.pop_back();
 	}
 
