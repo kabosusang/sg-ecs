@@ -103,4 +103,39 @@ inline component_id_type type_hash(const std::string& name) {
 	return hashed_string::value(name.data(), name.size());
 }
 
+
+
+// ==========================================
+//resource index
+inline component_id_type next_resource_id() noexcept {
+    static std::atomic<component_id_type> counter{ 0 };
+    return counter.fetch_add(1, std::memory_order_relaxed);
+}
+
+template <typename T>
+component_id_type resource_type_id() noexcept {
+    static const component_id_type id = next_resource_id();
+    return id;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 } //namespace ecs

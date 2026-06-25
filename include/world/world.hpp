@@ -4,6 +4,7 @@
 #include <core/component_registry.hpp>
 #include <core/entity_index.hpp>
 #include <storage/archetype.hpp>
+#include <storage/resource_store.hpp>
 #include <storage/sparse_set.hpp>
 
 namespace ecs {
@@ -193,7 +194,6 @@ public:
 	}
 
 	// ================ Meta ============================
-
 	[[nodiscard]] size_t archetype_count() const noexcept { return archetypes_.size(); }
 	[[nodiscard]] size_t archetype_generation() const noexcept { return archetype_generation_; }
 	[[nodiscard]] const auto& archetypes() const noexcept { return archetypes_; }
@@ -221,7 +221,7 @@ private:
 
 		auto na = std::make_unique<archetype>();
 		na->id_ = archetypes_.size();
-        
+
 		na->table_mask_ = target_mask;
 		na->table_comps_ = from.table_comps_;
 		na->table_comps_.insert(cid);
@@ -287,9 +287,10 @@ private:
 		archetype_generation_ = archetypes_.size();
 		return to_id;
 	}
+
+
+public:
 	// ================ SparseSet Helper ================
-
-
 	template <typename T>
 	raw_sparse_set* typed_sparse_set_ref() noexcept {
 		component_id_type cid = type_index<T>();
@@ -323,17 +324,49 @@ private:
 		return *sparse_sets_[cid];
 	}
 
+public:
+	// ===== tick =====
+	tick advance_tick() noexcept { return ++current_tick_; }
+	[[nodiscard]] tick current_tick() const noexcept { return current_tick_; }
+
+public:
+	// ================ Resource ================
+	template <typename T>
+	void insert_resource(T&& value) {
+		resources_.insert(std::forward<T>(value));
+	}
+
+	template <typename T>
+	[[nodiscard]] T* get_resource() noexcept { return resources_.get<T>(); }
+
+	template <typename T>
+	[[nodiscard]] res<T> res() noexcept { return res<T>(resources_); }
+
+	template <typename T>
+	[[nodiscard]] res_mut<T> res_mut() noexcept {
+		return res_mut<T>(resources_, current_tick_);
+	}
+
+	template <typename T>
+	[[nodiscard]] bool has_resource() const noexcept { return resources_.exists<T>(); }
+
+	template <typename T>
+	void remove_resource() noexcept { resources_.remove<T>(); }
+
 private:
-    
 	entity_index entities_;
 	component_registry registry_;
-
 	archetype_graph graph_;
-	std::vector<std::unique_ptr<archetype>> archetypes_;
 	std::vector<std::vector<size_t>> component_index_;
 	size_t archetype_generation_ = 0;
 
+	//Tick
+	tick current_tick_;
+
+	//Storage 可以封装一个Storage类有点懒了
+	std::vector<std::unique_ptr<archetype>> archetypes_;
 	std::vector<std::unique_ptr<raw_sparse_set>> sparse_sets_;
+	resource_store resources_;
 };
 
 } //namespace ecs
